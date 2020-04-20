@@ -541,6 +541,24 @@ confusionMatrix(testset$classe,predict)$overall</code></pre>
 ##      0.0000000            NaN</code></pre>
 <p>From the confusion matrix info, we see the overall accuracy is 99.7%, i.e. the out of sample error rate is very low. This is an acceptable result to warn no further model tests.</p>
 </div>
+<div id="running-model-on-given-test-set-to-predict-classe-for-each-row" class="section level3">
+<h3>Running model on given test set to predict classe for each row</h3>
+<pre class="r"><code>predictFinal &lt;- predict(rfmodel,testing)
+pml_write_files &lt;- function(x) {
+    n &lt;- length(x)
+    for(i in 1:n) {
+        filename &lt;- paste0(&quot;Test_id_&quot;, i, &quot;.txt&quot;)
+        write.table(x[i], file=filename, quote=F, row.names=F, col.names=F)
+    }
+}
+
+# create prediction files to submit
+pml_write_files(predictFinal)
+
+predictFinal</code></pre>
+<pre><code>##  [1] B A B A A E D B A A B C B A E E A B B B
+## Levels: A B C D E</code></pre>
+</div>
 </div>
 
 

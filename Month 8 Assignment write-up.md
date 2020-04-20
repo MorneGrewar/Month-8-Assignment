@@ -98,6 +98,23 @@ confusionMatrix(testset$classe,predict)$overall
 
 From the confusion matrix info, we see the overall accuracy is 99.7%, i.e. the out of sample error rate is very low. This is an acceptable result to warn no further model tests.
 
+### Running model on given test set to predict classe for each row
+
+```{r Final}
+predictFinal <- predict(rfmodel,testing)
+pml_write_files <- function(x) {
+    n <- length(x)
+    for(i in 1:n) {
+        filename <- paste0("Test_id_", i, ".txt")
+        write.table(x[i], file=filename, quote=F, row.names=F, col.names=F)
+    }
+}
+
+# create prediction files to submit
+pml_write_files(predictFinal)
+
+predictFinal
+```
 
 
 
